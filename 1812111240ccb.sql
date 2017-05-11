@@ -1,0 +1,2 @@
+insert into cm_ulitsa (CM_OKATO,CM_NPOSELOK,CM_CTEXT,CM_SOCR,CM_NULITSAID) values (75232850001,0,'онаедш','СК','870039000006');
+insert into cm_ulitsa (CM_OKATO,CM_NPOSELOK,CM_CTEXT,CM_SOCR,CM_NULITSAID) values (75217833004,0,'гюоюдмюъ','СК','870039000006');

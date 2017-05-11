@@ -1,0 +1,169 @@
+object DBase: TDBase
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Left = 215
+  Top = 103
+  Height = 640
+  Width = 870
+  object OLelena: TOracleLogon
+    Session = OSelena
+    Retries = 5
+    Options = [ldDatabase, ldDatabaseList]
+    AliasDropDownCount = 8
+    HistorySize = 6
+    HistoryWithPassword = False
+    Caption = 'База Elena_Oracle'
+    Left = 24
+    Top = 72
+  end
+  object OSelena: TOracleSession
+    Cursor = crHourGlass
+    DesignConnection = False
+    LogonUsername = 'serg'
+    LogonPassword = 'lenin_563sf'
+    LogonDatabase = 'LENIN'
+    ConnectAs = caNormal
+    ThreadSafe = False
+    Preferences.FloatPrecision = 0
+    Preferences.IntegerPrecision = 0
+    Preferences.SmallIntPrecision = -1
+    Preferences.UseOCI7 = False
+    Preferences.ConvertCRLF = True
+    Preferences.TrimStringFields = True
+    Preferences.MaxStringFieldSize = 0
+    Preferences.ZeroDateIsNull = True
+    Preferences.NullLOBIsEmpty = False
+    Pooling = spNone
+    MTSOptions = [moImplicit, moUniqueServer]
+    Connected = False
+    RollbackOnDisconnect = False
+    NullValue = nvUnAssigned
+    SQLTrace = stUnchanged
+    OptimizerGoal = ogUnchanged
+    IsolationLevel = ilUnchanged
+    BytesPerCharacter = bc1Byte
+    Left = 24
+    Top = 24
+  end
+  object ODSnaspunkt: TOracleDataSet
+    SQL.Strings = (
+      
+        'select nnaspunkt,ctext naim,socr,rtrim(socr)||'#39' '#39'||rtrim(ctext)c' +
+        'text from naspunkt'
+      'order by naim')
+    ReadBuffer = 25
+    Optimize = True
+    Debug = False
+    StringFieldsOnly = False
+    SequenceField.ApplyMoment = amOnPost
+    OracleDictionary.EnforceConstraints = False
+    OracleDictionary.UseMessageTable = False
+    OracleDictionary.DefaultValues = False
+    OracleDictionary.DynamicDefaults = False
+    OracleDictionary.FieldKinds = False
+    OracleDictionary.DisplayFormats = False
+    OracleDictionary.RangeValues = False
+    OracleDictionary.RequiredFields = True
+    QBEDefinition.SaveQBEValues = True
+    QBEDefinition.AllowFileWildCards = True
+    QBEDefinition.QBEFontColor = clNone
+    QBEDefinition.QBEBackgroundColor = clNone
+    Cursor = crDefault
+    ReadOnly = True
+    LockingMode = lmCheckImmediate
+    QueryAllRecords = True
+    CountAllRecords = False
+    RefreshOptions = []
+    CommitOnPost = True
+    CachedUpdates = False
+    QBEMode = False
+    Session = OSelena
+    DesignActivation = False
+    Active = False
+    Left = 120
+    Top = 24
+  end
+  object OQgetulid: TOracleQuery
+    SQL.Strings = (
+      'select max(nulitsaid)+1 from ulitsa where nnaspunkt=:npid')
+    Session = OSelena
+    ReadBuffer = 25
+    Optimize = True
+    Debug = False
+    Variables.Data = {0300000001000000050000003A4E504944050000000000000000000000}
+    Cursor = crDefault
+    StringFieldsOnly = False
+    Threaded = False
+    ThreadSynchronized = True
+    Left = 200
+    Top = 24
+  end
+  object ODSulitsa: TOracleDataSet
+    SQL.Strings = (
+      
+        'select nulitsaid,rtrim(ctext)||'#39' '#39'||rtrim(socr) ctext,nnaspunkt ' +
+        'from ulitsa u'
+      'where nnaspunkt=0'
+      'order by ctext')
+    ReadBuffer = 25
+    Optimize = True
+    Debug = False
+    StringFieldsOnly = False
+    SequenceField.ApplyMoment = amOnPost
+    OracleDictionary.EnforceConstraints = False
+    OracleDictionary.UseMessageTable = False
+    OracleDictionary.DefaultValues = False
+    OracleDictionary.DynamicDefaults = False
+    OracleDictionary.FieldKinds = False
+    OracleDictionary.DisplayFormats = False
+    OracleDictionary.RangeValues = False
+    OracleDictionary.RequiredFields = True
+    QBEDefinition.SaveQBEValues = True
+    QBEDefinition.AllowFileWildCards = True
+    QBEDefinition.QBEFontColor = clNone
+    QBEDefinition.QBEBackgroundColor = clNone
+    Cursor = crDefault
+    ReadOnly = True
+    LockingMode = lmCheckImmediate
+    QueryAllRecords = True
+    CountAllRecords = False
+    RefreshOptions = []
+    CommitOnPost = True
+    CachedUpdates = False
+    QBEMode = False
+    Session = OSelena
+    DesignActivation = False
+    Active = False
+    Left = 117
+    Top = 73
+  end
+  object OQnewnpid: TOracleQuery
+    SQL.Strings = (
+      'select max(nnaspunkt) from naspunkt')
+    Session = OSelena
+    ReadBuffer = 25
+    Optimize = True
+    Debug = False
+    Cursor = crDefault
+    StringFieldsOnly = False
+    Threaded = False
+    ThreadSynchronized = True
+    Left = 200
+    Top = 72
+  end
+  object OQokato: TOracleQuery
+    SQL.Strings = (
+      'select okato from naspunkt where nnaspunkt=:npid')
+    Session = OSelena
+    ReadBuffer = 25
+    Optimize = True
+    Debug = False
+    Variables.Data = {0300000001000000050000003A4E504944030000000000000000000000}
+    Cursor = crDefault
+    StringFieldsOnly = False
+    Threaded = False
+    ThreadSynchronized = True
+    Left = 208
+    Top = 120
+  end
+end
